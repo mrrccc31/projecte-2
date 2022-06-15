@@ -1,25 +1,25 @@
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     projectile = sprites.createProjectileFromSprite(img`
-        . . . . . . . . d . . . . . . . 
-        . . . . . . . . d . . . . . . . 
-        . . . . . . . c d . . . . . . . 
-        . . . . . . . c b . . . . . . . 
-        . . . . . . . f f . . . . . . . 
-        . . . . . . . c 7 . . . . . . . 
-        . . . . . 7 . f f . . . . . . . 
-        . . . . . 7 . 8 7 . . . . . . . 
-        . . . . . 7 8 8 5 . . . . . . . 
-        . . . . 8 7 8 7 5 . . . . . . . 
-        . . . . 8 c c c 6 . . . . . . . 
-        . . . . 8 8 7 7 7 . . . . . . . 
-        . . . . . f c c 6 . . . . . . . 
-        . . . . . 6 6 7 7 . . . . . . . 
-        . . . . . 8 6 6 7 . . . . . . . 
-        . . . . . 8 6 6 7 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . 4 4 . . . . . . . 
+        . . . . . . 4 5 5 4 . . . . . . 
+        . . . . . . 2 5 5 2 . . . . . . 
+        . . . . . . . 2 2 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
         `, mySprite, 0, -50)
     music.pewPew.play()
 })
-sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Player, function (sprite, otherSprite) {
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
     ASTEROIDE.destroy()
     otherSprite.destroy(effects.confetti, 500)
     info.changeScoreBy(1)
@@ -54,10 +54,9 @@ mySprite = sprites.create(img`
     `, SpriteKind.Player)
 mySprite.setPosition(77, 32)
 controller.moveSprite(mySprite, 100, 100)
-mySprite.setPosition(0, 0)
 mySprite.setStayInScreen(true)
 info.setLife(5)
-game.onUpdateInterval(500, function () {
+game.onUpdateInterval(1000, function () {
     ASTEROIDE = sprites.createProjectileFromSide(img`
         . . . . . . . . . c c 8 . . . . 
         . . . . . . 8 c c c f 8 c c . . 
